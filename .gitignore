@@ -1,0 +1,6 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/AgriTag/bin/Debug/net6.0
+/AgriTag/obj/Debug/net6.0
