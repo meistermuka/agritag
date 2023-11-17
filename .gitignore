@@ -1,0 +1,16 @@
+﻿/.vs/AgriTag/v17/.suo
+/.vs/AgriTag/DesignTimeBuild/.dtbcache.v2
+/AgriTag/bin/Debug/net6.0
+/AgriTag/obj/Debug/net6.0/ref
+/AgriTag/obj/Debug/net6.0/refint
+/AgriTag/obj/Debug/net6.0/staticwebassets
+*.cache
+/AgriTag/obj/Debug/net6.0/AgriTag.AssemblyInfo.cs
+/AgriTag/obj/Debug/net6.0/AgriTag.assets.cache
+/AgriTag/obj/Debug/net6.0/AgriTag.csproj.CopyComplete
+/AgriTag/obj/Debug/net6.0/AgriTag.csproj.FileListAbsolute.txt
+/AgriTag/obj/Debug/net6.0/AgriTag.dll
+/AgriTag/obj/Debug/net6.0/AgriTag.GeneratedMSBuildEditorConfig.editorconfig
+/AgriTag/obj/Debug/net6.0/AgriTag.MvcApplicationPartsAssemblyInfo.cs
+/AgriTag/obj/Debug/net6.0/staticwebassets.build.json
+*.pdb
