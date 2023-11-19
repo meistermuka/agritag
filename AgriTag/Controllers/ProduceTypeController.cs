@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AgriTag.Data;
+using AgriTag.Data.DAL;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,6 +10,12 @@ namespace AgriTag.Controllers
     [ApiController]
     public class ProduceTypeController : ControllerBase
     {
+        private IProduceTypeRepository _produceTypeRepository = null;
+
+        public ProduceTypeController(IProduceTypeRepository produceTypeRepository)
+        {
+            _produceTypeRepository = produceTypeRepository;
+        }
         // GET: api/<ProduceTypeController>
         [HttpGet]
         public IEnumerable<string> Get()
