@@ -1,8 +1,11 @@
-﻿using AgriTag.Data;
+﻿using AgriTag.Common.Helpers;
+using AgriTag.Data;
 using AgriTag.Data.DAL;
 using AgriTag.Models;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Serilog.Debugging;
+using System.Data;
 using System.Net;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -83,10 +86,32 @@ namespace AgriTag.Controllers
             }
         }
 
-        // PUT api/<ProduceTypeController>/5
-        [HttpPut("{id}")]
-        public void Put(string id, [FromBody] string value)
+        // PATCH api/<ProduceTypeController>/5
+        [HttpPatch("{id}")]
+        public IActionResult Patch(string id, [FromBody] JsonPatchDocument<ProduceType> patchDocument)
         {
+            try
+            {
+                if (!ControllerHelpers.ContainsValidProduceTypeJsonPatchPath(patchDocument))
+                {
+                    _logger.LogError("PATCH contains invalid path to update");
+                    return new BadRequestObjectResult(HttpStatusCode.BadRequest);
+                }
+                var documentToPatch = _produceTypeRepository.GetProduceTypeByID(id);
+                if (documentToPatch == null)
+                {
+                    _logger.LogError("Unable to find document to PATCH");
+                    return new NotFoundObjectResult(HttpStatusCode.NotFound);
+                }
+                patchDocument.ApplyTo(documentToPatch);
+                _produceTypeRepository.Save();
+                return new OkObjectResult(documentToPatch);
+                
+            }
+            catch (Exception ex)
+            {
+                return _GenericErrorProcessor(ex.Message, ex);
+            }
         }
 
         // DELETE api/<ProduceTypeController>/5

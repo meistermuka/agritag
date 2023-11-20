@@ -33,7 +33,8 @@ try
 
     builder.Services.AddScoped<IProduceTypeRepository, ProduceTypeRepository>();
 
-    builder.Services.AddControllers();
+    builder.Services.AddControllers(
+        options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true);
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
