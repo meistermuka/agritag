@@ -18,9 +18,10 @@ namespace AgriTag.Data.DAL
             return context.ProduceTypes.ToList();
         }
 
-        public ProduceType GetProduceTypeByID(int id)
+        public ProduceType GetProduceTypeByID(string id)
         {
-            return context.ProduceTypes.Find(id);
+            Guid produceTypeId = Guid.Parse( id );
+            return context.ProduceTypes.Find(produceTypeId);
         }
 
         public void InsertProduceType(ProduceType produceType)
