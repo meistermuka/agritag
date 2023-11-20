@@ -2,5 +2,6 @@
 {
     public class Price
     {
+        public Guid PriceId;
     }
 }
