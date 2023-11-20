@@ -34,7 +34,7 @@ try
     builder.Services.AddScoped<IProduceTypeRepository, ProduceTypeRepository>();
 
     builder.Services.AddControllers(
-        options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true);
+        options => options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true).AddNewtonsoftJson();
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
