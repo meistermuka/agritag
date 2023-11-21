@@ -25,3 +25,5 @@
 /.vs/AgriTag/v17/.futdcache.v2
 /AgriTag/obj/AgriTag.csproj.nuget.dgspec.json
 /AgriTag/obj/project.assets.json
+/AgriTag/obj/AgriTag.csproj.nuget.g.props
+*.wsuo
