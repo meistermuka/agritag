@@ -116,8 +116,24 @@ namespace AgriTag.Controllers
 
         // DELETE api/<ProduceTypeController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(string id)
         {
+            try
+            {
+                var produceTypeToDelete = _produceTypeRepository.GetProduceTypeByID(id);
+                if (produceTypeToDelete == null)
+                {
+                    _logger.LogError("Unable to find produceType to DELETE");
+                    return new NotFoundObjectResult(HttpStatusCode.NotFound);
+                }
+                _produceTypeRepository.DeleteProduceTypeByID(id);
+                _produceTypeRepository.Save();
+                return new OkObjectResult(produceTypeToDelete);
+            }
+            catch (Exception ex)
+            {
+                return _GenericErrorProcessor(ex.Message, ex);
+            }
         }
     }
 }

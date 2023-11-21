@@ -8,6 +8,7 @@ namespace AgriTag.Data.DAL
         ProduceType GetProduceTypeByID(string id);
         void InsertProduceType(ProduceType produceType);
         void UpdateProduceType(ProduceType produceType);
+        void DeleteProduceTypeByID(string id);
         void Save();
     }
 }

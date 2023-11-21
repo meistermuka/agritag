@@ -10,5 +10,6 @@ namespace AgriTag.Models
         public Guid ProduceTypeId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

@@ -33,6 +33,13 @@ namespace AgriTag.Data.DAL
         {
             context.Entry(produceType).State = EntityState.Modified;
         }
+
+        public void DeleteProduceTypeByID(string id)
+        {
+            Guid produceTypeId = Guid.Parse(id);
+            var produceTypeToDelete = context.ProduceTypes.Find(produceTypeId);
+            produceTypeToDelete.IsDeleted = true;
+        }
         public void Save()
         {
             context.SaveChanges();

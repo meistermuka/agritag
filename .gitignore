@@ -14,3 +14,14 @@
 /AgriTag/obj/Debug/net6.0/AgriTag.MvcApplicationPartsAssemblyInfo.cs
 /AgriTag/obj/Debug/net6.0/staticwebassets.build.json
 *.pdb
+/AgriTag/obj/project.assets.json
+/AgriTag/obj/AgriTag.csproj.nuget.dgspec.json
+/.vs/ProjectEvaluation/agritag.metadata.v7.bin
+/.vs/ProjectEvaluation/agritag.projects.v7.bin
+/.vs/AgriTag/v17/.futdcache.v2
+/.vs/AgriTag/FileContentIndex/*.vsidx
+/.vs/ProjectEvaluation/agritag.metadata.v7.bin
+/.vs/ProjectEvaluation/agritag.projects.v7.bin
+/.vs/AgriTag/v17/.futdcache.v2
+/AgriTag/obj/AgriTag.csproj.nuget.dgspec.json
+/AgriTag/obj/project.assets.json
