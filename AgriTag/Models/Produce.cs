@@ -1,7 +1,10 @@
-﻿namespace AgriTag.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace AgriTag.Models
 {
     public class Produce
     {
+        [Key]
         public Guid ProduceId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
