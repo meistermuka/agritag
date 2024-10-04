@@ -18,15 +18,16 @@ namespace AgriTag.Data.DAL
             return context.ProduceTypes.ToList();
         }
 
-        public ProduceType GetProduceTypeByID(string id)
+        public async Task<ProduceType?> GetProduceTypeByID(string id)
         {
             Guid produceTypeId = Guid.Parse( id );
-            return context.ProduceTypes.Find(produceTypeId);
+            return await context.ProduceTypes.FindAsync(produceTypeId);
         }
 
-        public void InsertProduceType(ProduceType produceType)
+        public async Task InsertProduceType(ProduceType produceType)
         {
-            context.ProduceTypes.Add(produceType);
+            await context.ProduceTypes.AddAsync(produceType);
+            await context.SaveChangesAsync();
         }
 
         public void UpdateProduceType(ProduceType produceType)
