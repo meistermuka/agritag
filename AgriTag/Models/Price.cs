@@ -2,6 +2,8 @@
 {
     public class Price
     {
-        public Guid PriceId;
+        public Guid PriceId { get; set; }
+        public double Value {  get; set; }
+
     }
 }

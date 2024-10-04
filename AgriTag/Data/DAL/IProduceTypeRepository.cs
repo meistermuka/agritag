@@ -5,8 +5,8 @@ namespace AgriTag.Data.DAL
     public interface IProduceTypeRepository : IDisposable
     {
         IEnumerable<ProduceType> GetProduceTypes();
-        ProduceType GetProduceTypeByID(string id);
-        void InsertProduceType(ProduceType produceType);
+        Task<ProduceType?> GetProduceTypeByID(string id);
+        Task InsertProduceType(ProduceType produceType);
         void UpdateProduceType(ProduceType produceType);
         void DeleteProduceTypeByID(string id);
         void Save();

@@ -56,6 +56,8 @@ try
         });
     });
 
+    builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Program>());
+
     var app = builder.Build();
     Log.Information("Starting AgriTag...");
 

@@ -1,11 +1,11 @@
-﻿using AgriTag.Common.Helpers;
-using AgriTag.Data;
+﻿using AgriTag.Commands;
+using AgriTag.Common.Helpers;
 using AgriTag.Data.DAL;
+using AgriTag.Dtos;
 using AgriTag.Models;
+using MediatR;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using Serilog.Debugging;
-using System.Data;
 using System.Net;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -18,6 +18,7 @@ namespace AgriTag.Controllers
     {
         private IProduceTypeRepository _produceTypeRepository;
         private readonly ILogger<ProduceTypeController> _logger;
+        private readonly IMediator _mediator;
 
         private IActionResult _GenericErrorProcessor(string errorMessage, Exception ex)
         {
@@ -30,10 +31,11 @@ namespace AgriTag.Controllers
             };
         }
 
-        public ProduceTypeController(IProduceTypeRepository produceTypeRepository, ILogger<ProduceTypeController> logger)
+        public ProduceTypeController(IProduceTypeRepository produceTypeRepository, ILogger<ProduceTypeController> logger, IMediator mediator)
         {
             _produceTypeRepository = produceTypeRepository;
             _logger = logger;
+            _mediator = mediator;
         }
         // GET: api/<ProduceTypeController>
         [HttpGet]
@@ -51,34 +53,35 @@ namespace AgriTag.Controllers
 
         // GET api/<ProduceTypeController>/5
         [HttpGet("{id}")]
-        public IActionResult Get(string id)
+        public async Task<IActionResult> Get(string id)
         {
             try
             {
-                ProduceType theReturn = _produceTypeRepository.GetProduceTypeByID(id);
-                if (theReturn == null)
+                var query = new GetProduceTypeQuery(id);
+                var produceType = await _mediator.Send(query);
+                if (produceType == null)
                 {
                     return new NotFoundObjectResult(HttpStatusCode.NotFound);
                 }
-                return new OkObjectResult(theReturn);
+                return new OkObjectResult(produceType);
             }
             catch (Exception ex)
             {
-                return _GenericErrorProcessor(ex.Message, ex);
+                return _GenericErrorProcessor("Something went wrong", ex);
             }
             
         }
 
         // POST api/<ProduceTypeController>
         [HttpPost]
-        public IActionResult Post([FromBody] ProduceType produceType)
+        public async Task<IActionResult> Post([FromBody] ProduceTypeDto produceType)
         {
             try
             {
-                _produceTypeRepository.InsertProduceType(produceType);
-                _produceTypeRepository.Save();
+                var query = new AddProduceTypeQuery(produceType);
+                await _mediator.Send(query);
 
-                return new OkObjectResult(produceType);
+                return new OkResult();
             }
             catch(Exception ex)
             {
@@ -88,7 +91,7 @@ namespace AgriTag.Controllers
 
         // PATCH api/<ProduceTypeController>/5
         [HttpPatch("{id}")]
-        public IActionResult Patch(string id, [FromBody] JsonPatchDocument<ProduceType> patchDocument)
+        public async Task<IActionResult> Patch(string id, [FromBody] JsonPatchDocument<ProduceType> patchDocument)
         {
             try
             {
@@ -97,7 +100,7 @@ namespace AgriTag.Controllers
                     _logger.LogError("PATCH contains invalid path to update");
                     return new BadRequestObjectResult(HttpStatusCode.BadRequest);
                 }
-                var documentToPatch = _produceTypeRepository.GetProduceTypeByID(id);
+                var documentToPatch = await _produceTypeRepository.GetProduceTypeByID(id);
                 if (documentToPatch == null)
                 {
                     _logger.LogError("Unable to find document to PATCH");
